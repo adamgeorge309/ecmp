@@ -1,0 +1,437 @@
+file 30303 1685415918                                           
+version 2
+run BurstyTraffic-0-20230213-12:15:58-19536
+attr configname BurstyTraffic
+attr datetime 20230213-12:15:58
+attr datetimef 20230213-121558
+attr experiment BurstyTraffic
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network UdpAppExample
+attr processid 19536
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config image-path ../../../images
+config *.server.app[0].typename UdpApp
+config *.server.app[0].io.localPort 1000
+config *.server.app[0].io.destAddress "\"client\""
+config *.server.app[0].io.destPort 1000
+config *.server.app[0].source.typename BurstyPacketProducer
+config *.server.app[0].source.normalProducer.productionInterval 1s
+config *.server.app[0].source.normalProducer.packetLength 100B
+config *.server.app[0].source.burstProducer.productionInterval 0.1s
+config *.server.app[0].source.burstProducer.packetLength 1000B
+config *.server.app[0].source.scheduler.waitIntervals "\"40 4\""
+config *.server.app[0].source.scheduler.transitionProbabilities "\"0 1 1 0\""
+config network UdpAppExample
+config *.*.numApps 1
+config *.client.app[0].typename UdpApp
+config *.client.app[0].io.localPort 1000
+config *.client.app[0].io.destAddress "\"server\""
+config *.client.app[0].io.destPort 1000
+config *.client.app[0].source.productionInterval 1s
+config *.client.app[0].source.packetLength "intuniform(100B, 200B)"
+config *.client.app[0].source.packetData "intuniform(0, 1)"
+
+vector 0 UdpAppExample.client.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+0	14824 192 0 145 0 6 14 0 1 7 7
+vector 1 UdpAppExample.client.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+1	15016 119 0 128 0 5.0001081 7 0 6 21 91
+vector 2 UdpAppExample.client.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+2	15135 9 0 0 0 0 1 0 0 0 0
+vector 3 UdpAppExample.client.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+3	15144 9 0 0 0 0 1 0 0 0 0
+vector 4 UdpAppExample.server.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+4	15153 186 0 146 0 6 14 0 1 7 7
+vector 5 UdpAppExample.server.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+5	15339 119 0 134 0 5.0001369 7 0 6 21 91
+vector 6 UdpAppExample.server.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+6	15458 9 0 0 0 0 1 0 0 0 0
+vector 7 UdpAppExample.server.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+7	15467 9 0 0 0 0 1 0 0 0 0
+vector 8 UdpAppExample.client.app[0].source packetLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushed)
+attr title "packet lengths"
+attr unit b
+8	15476 90 0 137 0 6 7 872 1360 8088 9564096
+vector 9 UdpAppExample.server.app[0].source.normalProducer packetLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushed)
+attr title "packet lengths"
+attr unit b
+9	15566 85 0 138 0 6 7 800 800 5600 4480000
+vector 10 UdpAppExample.client.app[0].io packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+10	15651 92 1 139 0 6 7 109 170 1011 149439
+vector 11 UdpAppExample.server.app[0].io packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+11	15743 92 2 140 0 6 7 100 100 700 70000
+vector 12 UdpAppExample.client.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+12	15835 92 7 141 0 6 7 117 178 1067 166063
+vector 13 UdpAppExample.server.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+13	15927 92 8 142 0 6 7 108 108 756 81648
+vector 14 UdpAppExample.client.ppp[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+14	16019 101 11 145 0 6 7 1096 1584 9656 13538752
+vector 15 UdpAppExample.client.ppp[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+15	16120 80 11 145 0 6 7 0 0 0 0
+vector 16 UdpAppExample.client.ppp[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+16	16200 101 11 145 0 6 7 1096 1584 9656 13538752
+vector 17 UdpAppExample.client.ppp[0].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+17	16301 94 11 145 0 6 7 144 205 1256 228784
+vector 18 UdpAppExample.client.ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+18	16395 80 11 145 0 6 7 0 0 0 0
+vector 19 UdpAppExample.client.ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+19	16475 80 11 145 0 6 7 0 0 0 0
+vector 20 UdpAppExample.server.ppp[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+20	16555 101 12 146 0 6 7 1024 1024 7168 7340032
+vector 21 UdpAppExample.server.ppp[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+21	16656 80 12 146 0 6 7 0 0 0 0
+vector 22 UdpAppExample.server.ppp[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+22	16736 101 12 146 0 6 7 1024 1024 7168 7340032
+vector 23 UdpAppExample.server.ppp[0].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+23	16837 94 12 146 0 6 7 135 135 945 127575
+vector 24 UdpAppExample.server.ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+24	16931 80 12 146 0 6 7 0 0 0 0
+vector 25 UdpAppExample.server.ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+25	17011 80 12 146 0 6 7 0 0 0 0
+vector 26 UdpAppExample.client.ppp[0].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+26	17091 128 14 126 0.0001081 5.0001081 6 135 135 810 109350
+vector 27 UdpAppExample.client.ppp[0].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+27	17219 128 14 126 0.0001081 5.0001081 6 128 128 768 98304
+vector 28 UdpAppExample.client.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+28	17347 128 16 128 0.0001081 5.0001081 6 108 108 648 69984
+vector 29 UdpAppExample.client.app[0].io packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+29	17475 128 17 129 0.0001081 5.0001081 6 100 100 600 60000
+vector 30 UdpAppExample.client.app[0].sink packetLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushed)
+attr title "packet lengths"
+attr unit b
+30	17603 128 18 130 0.0001081 5.0001081 6 800 800 4800 3840000
+vector 31 UdpAppExample.client.app[0].sink droppedPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropped)
+attr title "dropped packet lengths"
+attr unit b
+31	17731 128 18 130 0.0001081 5.0001081 6 800 800 4800 3840000
+vector 32 UdpAppExample.server.ppp[0].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+32	17859 128 21 132 0.0001433 5.0001369 6 144 202 1051 186759
+vector 33 UdpAppExample.server.ppp[0].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+33	17987 128 21 132 0.0001433 5.0001369 6 137 195 1009 172339
+vector 34 UdpAppExample.server.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+34	18115 128 23 134 0.0001433 5.0001369 6 117 175 889 134379
+vector 35 UdpAppExample.server.app[0].io packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+35	18243 128 24 135 0.0001433 5.0001369 6 109 167 841 120539
+vector 36 UdpAppExample.server.app[0].sink packetLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushed)
+attr title "packet lengths"
+attr unit b
+36	18371 132 25 136 0.0001433 5.0001369 6 872 1336 6728 7714496
+vector 37 UdpAppExample.server.app[0].sink droppedPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropped)
+attr title "dropped packet lengths"
+attr unit b
+37	18503 132 25 136 0.0001433 5.0001369 6 872 1336 6728 7714496
+vector 38 UdpAppExample.client.app[0].source dataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "data rate"
+attr unit bps
+38	18635 810 27 137 0.1 6 60 0 13360 67280 771449600
+38	27696 39 146 146 6.000000065303 6.000000065303 1 20825995742.921 20825995742.921 20825995742.921 4.3372209868416e+20
+vector 39 UdpAppExample.server.app[0].source.normalProducer dataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "data rate"
+attr unit bps
+39	19445 806 28 138 0.1 6 60 0 8000 48000 384000000
+39	27735 38 146 146 6.000000065303 6.000000065303 1 12250585731.13 12250585731.13 12250585731.13 1.5007685075577e+20
+vector 40 UdpAppExample.client.ppp[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+40	20251 822 35 145 0.1 6 60 0 15600 80720 1102969600
+40	27773 39 146 146 6.000000065303 6.000000065303 1 24256159747.638 24256159747.638 24256159747.638 5.8836128570293e+20
+vector 41 UdpAppExample.client.ppp[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+41	21073 822 35 145 0.1 6 60 0 15600 80720 1102969600
+41	27812 39 146 146 6.000000065303 6.000000065303 1 24256159747.638 24256159747.638 24256159747.638 5.8836128570293e+20
+vector 42 UdpAppExample.server.ppp[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+42	21895 822 36 146 0.1 6 60 0 10240 61440 629145600
+42	27851 39 146 146 6.000000065303 6.000000065303 1 15680749735.847 15680749735.847 15680749735.847 2.4588591227827e+20
+vector 43 UdpAppExample.server.ppp[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+43	22717 822 36 146 0.1 6 60 0 10240 61440 629145600
+43	27890 39 146 146 6.000000065303 6.000000065303 1 15680749735.847 15680749735.847 15680749735.847 2.4588591227827e+20
+vector 44 UdpAppExample.client.app[0].sink dataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "data rate"
+attr unit bps
+44	23539 675 42 130 0.1 5 50 0 8000 40000 320000000
+44	27929 166 146 146 5.1 6.000000065303 11 0 8000 8000 64000000
+vector 45 UdpAppExample.client.app[0].sink meanBitLifeTimePerPacket:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source weightedMeanPerGroup(groupRegionsPerPacket(lifeTimePerRegion(packetPushed)))
+attr title "mean bit life time per packet"
+attr unit s
+45	24214 137 42 130 0.0001081 4.0001081 5 0.0001081 0.0001081 0.0005405 5.842805e-08
+vector 46 UdpAppExample.client.app[0].sink packetJitter:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source jitter(weightedMeanPerGroup(groupRegionsPerPacket(lifeTimePerRegion(packetPushed))))
+attr title "packet jitter"
+attr unit s
+46	24351 105 42 130 0.0001081 4.0001081 5 0 0.0001081 0.0001081 1.168561e-08
+vector 47 UdpAppExample.client.app[0].sink packetDelayDifferenceToMean:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source differenceToMean(weightedMeanPerGroup(groupRegionsPerPacket(lifeTimePerRegion(packetPushed))))
+attr title "packet delay difference to mean"
+attr unit s
+47	24456 115 42 130 0.0001081 4.0001081 5 0 1.3552527156069e-20 1.3552527156069e-20 1.8367099231599e-40
+vector 48 UdpAppExample.client.app[0].sink packetDelayVariation:vector ETV
+attr recordingmode vector
+attr source stddev(weightedMeanPerGroup(groupRegionsPerPacket(lifeTimePerRegion(packetPushed))))
+attr title "packet delay variation"
+attr unit s
+48	24571 97 42 130 0.0001081 4.0001081 5 0 0 0 0
+vector 49 UdpAppExample.client.app[0].sink droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+49	24668 675 42 130 0.1 5 50 0 8000 40000 320000000
+49	28095 166 146 146 5.1 6.000000065303 11 0 8000 8000 64000000
+vector 50 UdpAppExample.server.app[0].sink dataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "data rate"
+attr unit bps
+50	25343 678 48 136 0.1 5 50 0 13360 56400 653075200
+50	28261 167 146 146 5.1 6.000000065303 11 0 10880 10880 118374400
+vector 51 UdpAppExample.server.app[0].sink meanBitLifeTimePerPacket:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source weightedMeanPerGroup(groupRegionsPerPacket(lifeTimePerRegion(packetPushed)))
+attr title "mean bit life time per packet"
+attr unit s
+51	26021 137 48 136 0.0001433 4.0001249 5 0.0001153 0.0001617 0.0007045 1.0095237e-07
+vector 52 UdpAppExample.server.app[0].sink packetJitter:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source jitter(weightedMeanPerGroup(groupRegionsPerPacket(lifeTimePerRegion(packetPushed))))
+attr title "packet jitter"
+attr unit s
+52	26158 131 48 136 0.0001433 4.0001249 5 -4.64e-05 0.0001433 0.0001249 2.304177e-08
+vector 53 UdpAppExample.server.app[0].sink packetDelayDifferenceToMean:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source differenceToMean(weightedMeanPerGroup(groupRegionsPerPacket(lifeTimePerRegion(packetPushed))))
+attr title "packet delay difference to mean"
+attr unit s
+53	26289 134 48 136 0.0001433 4.0001249 5 -8e-06 2.96e-05 3.0666666666667e-05 1.2442311111111e-09
+vector 54 UdpAppExample.server.app[0].sink packetDelayVariation:vector ETV
+attr recordingmode vector
+attr source stddev(weightedMeanPerGroup(groupRegionsPerPacket(lifeTimePerRegion(packetPushed))))
+attr title "packet delay variation"
+attr unit s
+54	26423 169 48 136 0.0001433 4.0001249 5 0 1.8495404884047e-05 5.3038183886429e-05 8.1044622667921e-10
+vector 55 UdpAppExample.server.app[0].sink droppedDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetDropped)
+attr title "dropped data rate"
+attr unit bps
+55	26592 1104 48 136 0.1 5 50 0 13360 56400 653075200
+55	28428 167 146 146 5.1 6.000000065303 11 0 10880 10880 118374400
+vector 56 UdpAppExample.server.app[0].source.burstProducer dataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushed)
+attr title "data rate"
+attr unit bps
+56	28595 853 146 146 0.1 6.000000065303 61 0 0 0 0
+vector 57 UdpAppExample.server.app[0].source.scheduler dataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "data rate"
+attr unit bps
+57	29448 855 146 146 0.1 6.000000065303 61 0 0 0 0
